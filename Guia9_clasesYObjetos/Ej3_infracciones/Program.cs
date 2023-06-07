@@ -9,7 +9,7 @@ namespace Ej3_infracciones
     class Program
     {
 
-        static void PantallaIngresoActa(SistemaActas sistema)
+        static void PantallaIngresoActa(SistemaInfracciones sistema)
         {
             Console.Clear();
 
@@ -22,11 +22,16 @@ namespace Ej3_infracciones
             int codigo = Convert.ToInt32(Console.ReadLine());
             while (codigo > 0)
             {
-                double monto = sistema.RegistrarInfraccion(codigo);
+                double monto = sistema.AgregarInfraccion(codigo);
                 Console.WriteLine($"Monto de la infracción({codigo}): $ {monto:f2}");
 
                 Console.WriteLine("Ingrese codigo infraccion(1 a 5 , 0 terminar)");
                 codigo = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Ingrese el tipo de eje (1,2 o 3)");
+                int Tipo = Convert.ToInt32(Console.ReadLine());
+                
+
             }
             sistema.FinalizarActa(true);
             Console.WriteLine("Total a pagar: {0:f2}", sistema.totalAPagar);
@@ -35,7 +40,7 @@ namespace Ej3_infracciones
             Console.ReadKey();
         }
 
-        static void PantallaImprimirDia(SistemaActas sistema)
+        static void PantallaImprimirDia(SistemaInfracciones sistema)
         {
             Console.Clear();
 
@@ -61,7 +66,7 @@ namespace Ej3_infracciones
             Console.WriteLine("Iniciando sistema");
             Console.WriteLine("Ingrese el valor Base (litros nafta/$)");
             double montoBase = Convert.ToDouble(Console.ReadLine());
-            SistemaActas sis = new SistemaActas(montoBase);
+            SistemaInfracciones sis = new SistemaInfracciones(montoBase);
             #endregion
 
             ConsoleKeyInfo key;
@@ -88,16 +93,7 @@ namespace Ej3_infracciones
                         }
                         break;
 
-                    case ConsoleKey.D3:
-                    case ConsoleKey.NumPad3:
-                        {
-                            #region pantalla finalizar acta
-                            sis.FinalizarActa(true);
-                            Console.WriteLine("Total a pagar: {0:f2}", sis.totalAPagar);
-                            #endregion
-
-                        }
-                        break;
+                   
 
 
                 }

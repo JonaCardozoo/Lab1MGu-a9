@@ -36,22 +36,45 @@ namespace Ej3_infracciones
         #region atributos generales de sistema
 
         public double BaseMonetaria { get; private set; }
-
+        
         public double Recaudacion { get; private set; }
 
         
+
         #endregion
 
         #region atributos por cada acta
-        int DniActa;
-        string nombre;
-        public double totalAPagar;
+        public int DniActa { get; private set; }
+        public string NombreActa { get; private set; }
+
+        public double SubTotalActa { get; private set; }
+
+        public double AjusteTipoVechiculo { get; private set; }
+
+        public double DescuentoPagoActa { get; private set; }
+
+        public double TotalActaPagar { get; private set; }
+
+        public int CodigoInfraccion { get; private set; }
+
+        public double UdsInfraccion { get; private set; }
+
+        public double MontoInfraccion { get; private set; }
+
+        public string DescripcionInfraccion { get; private set;}
+
+        public int tipoVehiculo { get; set; }
+
+        public double totalAPagar { get; private set; }
+
+        
         #endregion
 
         #region atributos por cada infraccion
         int codigoInfraccion;
         string descInfraccion;
         double montoInfraccion;
+        
         #endregion
 
         #region método del sistema
@@ -66,13 +89,13 @@ namespace Ej3_infracciones
         public void IniciarActa(int dni, string nombre)
         {
             this.DniActa = dni;
-            this.nombre = nombre;
+            this.NombreActa = nombre;
             totalAPagar = 0;
         }
 
-        public double RegistrarInfraccion(int codigo)
+        public double AgregarInfraccion(int tipoInfraccion)
         {
-            switch (codigo)
+            switch (tipoInfraccion)
             {
                 case 1:
                     {
@@ -123,8 +146,10 @@ namespace Ej3_infracciones
         }
         #endregion
 
+        
 
+
+        
        
-
     }
 }
