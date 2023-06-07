@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ej3_infracciones
 {
-    class SistemaActas
+    class SistemaInfracciones
     {
         #region nomenclador de infracciones
         int CODIGO_1_INFRACCION = 1;
@@ -16,43 +16,34 @@ namespace Ej3_infracciones
         int CODIGO_2_INFRACCION = 2;
         string DESC_2_INFRACCION = "alta de Matafuego, ley 2…";
         int UD_2_INFRACCION = 30;
+        //
+        int CODIGO_3_INFRACCION = 3;
+        string DESC_3_INFRACCION = "Sobrevelocidad...";
+        int UD_3_INFRACCION = 100;
+        //
+        int CODIGO_4_INFRACCION = 4;
+        string DESC_4_INFRACCION = "Falta de cinturón de seguridad (>2 ejes) o falta de casco (1 eje)";
+        int UD_4_INFRACCION = 85;
+        //
+        int CODIGO_5_INFRACCION = 5;
+        string DESC_5_INFRACCION = "Falta de respeto A la autoridad...";
+        int UD_5_INFRACCION = 1500;
+
+
+
         #endregion
 
         #region atributos generales de sistema
-        double montoBase;
+
+        public double BaseMonetaria { get; private set; }
 
         public double Recaudacion { get; private set; }
 
-        /*
-        double recaudacion;
-        public double Recaudacion
-        {
-            get {
-                    ...
-                return recaudacion;
-            }
-            set
-            {
-                recaudacion = value;
-            }
-        }
-        */
-
-        /*
-        double recaudacion;
-        public double GetRecaudacion()
-        {
-            return recaudacion;
-        }
-        public void SetRecaudacion(double Value)
-        {
-            recaudacion = Value;
-        }
-        */
+        
         #endregion
 
         #region atributos por cada acta
-        int dni;
+        int DniActa;
         string nombre;
         public double totalAPagar;
         #endregion
@@ -64,17 +55,17 @@ namespace Ej3_infracciones
         #endregion
 
         #region método del sistema
-        public void IniciarSistema(double montoBase)
+        public SistemaInfracciones(double Basemonetaria)
         {
-            this.montoBase = montoBase;
-            this.Recaudacion = 0;
+            this.BaseMonetaria = Basemonetaria;
+
         }
         #endregion
 
         #region métodos por acta
         public void IniciarActa(int dni, string nombre)
         {
-            this.dni = dni;
+            this.DniActa = dni;
             this.nombre = nombre;
             totalAPagar = 0;
         }
@@ -85,12 +76,36 @@ namespace Ej3_infracciones
             {
                 case 1:
                     {
-                        montoInfraccion = UD_1_INFRACCION * montoBase;
+                        montoInfraccion = UD_1_INFRACCION * BaseMonetaria;
                     }
                     break;
                 case 2:
                     {
-                        montoInfraccion = UD_2_INFRACCION * montoBase;
+                        montoInfraccion = UD_2_INFRACCION * BaseMonetaria;
+                    }
+                    break;
+
+                case 3:
+                    {
+
+                        montoInfraccion = UD_3_INFRACCION * BaseMonetaria;
+
+                    }
+                    break;
+
+                case 4:
+                    {
+
+                        montoInfraccion = UD_4_INFRACCION * BaseMonetaria;
+
+                    }
+                    break;
+
+                case 5:
+                    {
+
+                        montoInfraccion = UD_5_INFRACCION * BaseMonetaria;
+
                     }
                     break;
             }
@@ -98,11 +113,18 @@ namespace Ej3_infracciones
             return montoInfraccion;
         }
 
+        public double TotalApagar(double totalAPagar)
+        {
+            return totalAPagar;
+        }
         public void FinalizarActa(bool pagaEnElLugar)
         {
             Recaudacion += totalAPagar;
         }
         #endregion
+
+
+       
 
     }
 }

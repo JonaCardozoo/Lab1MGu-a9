@@ -55,14 +55,13 @@ namespace Ej3_infracciones
         }
         static void Main(string[] args)
         {
-            SistemaActas sis = new SistemaActas();
-
+            
             #region pantalla de configuracion
             Console.Clear();
             Console.WriteLine("Iniciando sistema");
             Console.WriteLine("Ingrese el valor Base (litros nafta/$)");
             double montoBase = Convert.ToDouble(Console.ReadLine());
-            sis.IniciarSistema(montoBase);
+            SistemaActas sis = new SistemaActas(montoBase);
             #endregion
 
             ConsoleKeyInfo key;
@@ -88,6 +87,19 @@ namespace Ej3_infracciones
                             #endregion
                         }
                         break;
+
+                    case ConsoleKey.D3:
+                    case ConsoleKey.NumPad3:
+                        {
+                            #region pantalla finalizar acta
+                            sis.FinalizarActa(true);
+                            Console.WriteLine("Total a pagar: {0:f2}", sis.totalAPagar);
+                            #endregion
+
+                        }
+                        break;
+
+
                 }
             } while (key.Key!= ConsoleKey.D0 && key.Key != ConsoleKey.NumPad0);
 
